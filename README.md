@@ -9,3 +9,10 @@ ISDeploymentCmd.exe [/Silent] {/SourcePath:<string> | /SP:<string>} {/Destinatio
 
 Example:
 ISDeploymentCmd.exe /SourcePath:"C:\Packages\MyProject.ispac" /DestinationServer:"Server\Instance" /DestinationPath:"/SSISDB/MyFolder/MyProject"
+
+### Compatibility
+Works on .NET 3.5 against SQL Server 2012 or higher
+
+### Known Issues
+
+Not at feature parity with ISDeploymentWizard.exe.
