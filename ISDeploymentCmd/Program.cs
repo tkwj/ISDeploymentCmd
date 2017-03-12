@@ -51,7 +51,7 @@ namespace ISDeploymentCmd
                     Console.WriteLine("Error: " + ex.Message);
                 }
 
-                Console.WriteLine(rc == 0 ? "Deployed sucessfully" : "Deploy failed");
+                Console.WriteLine(rc == 0 ? "Deployed successfully" : "Deploy failed");
             }
 
             if (Debugger.IsAttached)

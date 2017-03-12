@@ -16,3 +16,6 @@ Works on .NET 3.5 against SQL Server 2012 or higher
 ### Known Issues
 
 Not at feature parity with ISDeploymentWizard.exe.
+- Only supports File source
+- Only supports Server destination
+- No project password option
