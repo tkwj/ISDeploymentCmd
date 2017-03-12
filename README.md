@@ -14,7 +14,7 @@ ISDeploymentCmd.exe /SourcePath:"C:\Packages\MyProject.ispac" /DestinationServer
 
 ### Compatibility
 Built on .NET 4.0.
-Works for deploye against SQL Server 2012 or higher
+Works for deploys against SQL Server 2012 or higher
 
 ### Known Issues
 
