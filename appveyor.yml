@@ -16,6 +16,8 @@ artifacts:
   name: ISDeploymentCmd
 deploy:
   - provider: GitHub
+    auth_token:
+      secure: og5ueORG8xH29TO4NCeJAHOS0znZnidyrNXKNR2VONHyn3uh4fxH5u9yAvid8J22
     artifact: ISDeploymentCmd
     draft: false
     prerelease: false
