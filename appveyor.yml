@@ -14,7 +14,7 @@ after_build:
 artifacts:
 - path: ISDeploymentCmd.zip
   name: ISDeploymentCmd
-deploy
+deploy:
   - provider: GitHub
     artifact: ISDeploymentCmd
     draft: false
