@@ -3,5 +3,8 @@ configuration: Release
 platform: Any CPU
 build:
   verbosity: minimal
+after_build:
+- 7z a ISDeploymentCmd.zip %APPVEYOR_BUILD_FOLDER%\ISDeploymentCmd\bin\$(configuration)\*.exe
 artifacts:
-- path: ISDeploymentCmd\bin\$(configuration)\*.exe
+- path: ISDeploymentCmd.zip
+  name: ISDeploymentCmd
