@@ -12,6 +12,7 @@ namespace ISDeploymentCmd
             using (var connection = new SqlConnection(ConnectionString))
             {
                 int folderCreated = CreateFolder(folderName, connection);
+
                 using (var cmd = new SqlCommand())
                 {
                     cmd.Connection = connection;
@@ -38,7 +39,13 @@ namespace ISDeploymentCmd
         /// <returns></returns>
         public int CreateFolder(string folderName, SqlConnection connection = null)
         {
-            if (connection.Equals(null))
+            if (string.IsNullOrEmpty(folderName))
+            {
+                Exception ex = new Exception("FolderName must be supplied");
+                throw ex;
+            }
+
+            if (connection == null)
             {
                 connection = new SqlConnection(ConnectionString);
             }
@@ -58,7 +65,7 @@ namespace ISDeploymentCmd
                 catch (SqlException SqlEx)
                 {
                     // if folder exists error don't error out
-                    if (SqlEx.Number== 27190)
+                    if (SqlEx.Number == 27190)
                     {
                         return 0;
                     }
@@ -67,11 +74,6 @@ namespace ISDeploymentCmd
                         throw;
                     }
                 }
-                catch (Exception e)
-                {
-                    throw;
-                }
-                
             }
            
         }
