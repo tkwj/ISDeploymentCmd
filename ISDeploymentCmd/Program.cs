@@ -11,6 +11,8 @@ namespace ISDeploymentCmd
         public static string SourcePath { get; set; }
         public static string DestinationServer { get; set; }
         public static string DestinationPath { get; set; }
+        public static string FolderName { get; set; }
+        public static bool CreateFolder { get; set; }
         public static bool HelpOrDefaultCallled { get; set; }
 
         private static void Main(string[] args)
@@ -35,16 +37,33 @@ namespace ISDeploymentCmd
 
                 var cp = new CatalogProc(builder.ConnectionString);
 
-                Console.WriteLine("Deploy Started at " + DateTime.Now);
-                Console.WriteLine("Source File: {0}", SourcePath);
-                Console.WriteLine("Server: {0}", DestinationServer);
-                Console.WriteLine("Destination Path: {0}", DestinationPath);
+                if (!CreateFolder)
+                {
+                    
+                    Console.WriteLine("Deploy Started at " + DateTime.Now);
+                    Console.WriteLine("Source File: {0}", SourcePath);
+                    Console.WriteLine("Server: {0}", DestinationServer);
+                    Console.WriteLine("Destination Path: {0}", DestinationPath);
 
+                }
+                else
+                {
+                    Console.WriteLine("Deploy Folder Started at " + DateTime.Now);
+                    Console.WriteLine("Destination Folder: {0}", FolderName);
+                }
                 try
                 {
-                    rc = cp.DeployProject(GetPartFromPath(DestinationPath, PathPart.FolderName),
+                    if (!CreateFolder)
+                    {
+                        rc = cp.DeployProject(GetPartFromPath(DestinationPath, PathPart.FolderName),
                         GetPartFromPath(DestinationPath, PathPart.ProjectName),
                         File.ReadAllBytes(SourcePath));
+                    }
+                    else
+                    {
+                        rc = cp.CreateFolder(FolderName);
+                    }
+                    
                 }
                 catch (Exception ex)
                 {
@@ -86,6 +105,14 @@ namespace ISDeploymentCmd
                             case "DP":
                                 DestinationPath = arguments[i].Substring(arguments[i].IndexOf(':') + 1);
                                 break;
+                            case "FolderName":
+                            case "DF":
+                                FolderName = arguments[i].Substring(arguments[i].IndexOf(':') + 1);
+                                break;
+                            case "CreateFolder":
+                            case "CF":
+                                CreateFolder = true;
+                                break;
                             default:
                                 HelpOrDefaultCallled = true;
                                 return;
@@ -121,6 +148,8 @@ namespace ISDeploymentCmd
 {{/SourcePath:<string> | /SP:<string>}}
 {{/DestinationServer:<string> | /DS:<string>}}
 {{/DestinationPath:<string> | /DP:<string>}}
+{{/CreateFolder | /CF}}
+{{/FolderName:<string> | /DF:<string>}}
 
 Example:
 {0} /SourcePath:""C:\Packages\MyProject.ispac"" /DestinationServer:""Server\Instance"" /DestinationPath:""/SSISDB/MyFolder/MyProject""
