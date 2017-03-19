@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CatalogProc.cs" />
+    <Compile Include="create_folder.cs" />
     <Compile Include="deploy_project.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
